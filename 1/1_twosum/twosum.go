@@ -18,5 +18,5 @@ func twosum(arr []int, target int) (int, int) {
 			left++
 		}
 	}
-	return 0, 0
+	return -1, -1
 }
