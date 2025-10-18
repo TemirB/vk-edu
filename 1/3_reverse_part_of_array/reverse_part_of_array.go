@@ -20,8 +20,11 @@ func reverseArray(arr []int, left, right int) {
 }
 
 func reversePartOfArray(arr []int, k int) {
-	if k+1 >= len(arr) {
+	if len(arr) == 0 {
 		return
+	}
+	if k+1 >= len(arr) {
+		k = k % len(arr)
 	}
 
 	left, right := 0, len(arr)-1
