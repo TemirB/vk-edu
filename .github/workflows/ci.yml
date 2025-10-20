@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ "**" ]
+    branches: ["**"]
   pull_request:
-    branches: [ "**" ]
+    branches: ["**"]
   workflow_dispatch: {}
 
 concurrency:
@@ -15,8 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  lint:
-    name: golangci-lint
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -58,12 +57,13 @@ jobs:
 
       - name: Run tests
         run: |
-          go test -shuffle=on -race -covermode=atomic -coverprofile=coverage.out ./...
-          go tool cover -func=coverage.out | tail -n1
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh \
+            | sh -s -- -b "$(go env GOPATH)/bin" v2.5.0
+          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
+          golangci-lint --version
 
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-${{ matrix.go }}
-          path: coverage.out
-          if-no-files-found: error
+      - name: Lint
+        run: make lint
+
+      - name: Test (no coverage file)
+        run: make test
