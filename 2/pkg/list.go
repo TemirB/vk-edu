@@ -107,15 +107,3 @@ func Equal(a, b *Node) bool {
 	}
 	return a == nil && b == nil
 }
-
-// Сравнивает ноды и всех её потомков, чтобы определить, являются ли они одинкаовыми
-func (n *Node) compareForEachNode(other *Node) bool {
-	for n != nil && other != nil {
-		if n.data != other.data {
-			return false
-		}
-		n = n.Next()
-		other = other.Next()
-	}
-	return n == nil && other == nil
-}
