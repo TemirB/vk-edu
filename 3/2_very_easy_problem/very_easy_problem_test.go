@@ -27,7 +27,9 @@ func Test_veryEasyProblem(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			actual := veryEasyProblem(test.N, test.x, test.y)
+			bSearchActual := bSearch(test.N, test.x, test.y)
 
+			assert.Equal(t, bSearchActual, test.expected)
 			assert.Equal(t, actual, test.expected)
 		})
 	}
