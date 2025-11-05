@@ -24,7 +24,8 @@ func TestShellSort_Basic(t *testing.T) {
 
 	for _, tt := range cases {
 		t.Run(tt.name, func(t *testing.T) {
-			got := append([]int(nil), tt.in...)
+			got := make([]int, len(tt.in))
+			copy(got, tt.in)
 			ShellSort(got)
 
 			assert.Equal(t, got, tt.want)
