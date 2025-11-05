@@ -3,7 +3,7 @@ package sort0and1arrays
 import (
 	"testing"
 
-	"github.com/magiconair/properties/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_sort(t *testing.T) {

@@ -3,7 +3,7 @@ package merge2sortarray
 import (
 	"testing"
 
-	"github.com/magiconair/properties/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_merge(t *testing.T) {
